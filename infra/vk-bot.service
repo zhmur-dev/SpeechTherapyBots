@@ -1,0 +1,15 @@
+[Unit]
+Description=VK bot
+After=syslog.target
+After=network.target
+
+[Service]
+Type=simple
+User=<имя_пользователя>
+WorkingDirectory=/<абсолютный_путь_до_директории_проекта>/SpeechTherapyBots/backend
+ExecStart=/<абсолютный_путь_до_директории_проекта>/SpeechTherapistBot/backend/venv/bin/python3 /home/<имя_пользователя>/SpeechTherapyBots/backend/manage.py vk_bot
+RestartSec=10
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

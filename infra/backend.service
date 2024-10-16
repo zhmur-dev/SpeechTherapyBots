@@ -1,0 +1,12 @@
+[Unit]
+Description=gunicorn daemon 
+After=network.target 
+
+[Service]
+User=<имя_пользователя>
+WorkingDirectory=/<абсолютный_путь_до_директории_проекта>/SpeechTherapyBots/backend
+ExecStart=/<абсолютный_путь_до_директории_проекта>/SpeechTherapyBots/backend/venv/bin/gunicorn --bind 0.0.0.0:8000 backend.wsgi
+
+[Install]
+WantedBy=multi-user.target
+
