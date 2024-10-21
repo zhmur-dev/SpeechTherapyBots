@@ -1,43 +1,43 @@
-# Telegram и VK-боты для проекта «Привет, Логопед!»
-Кастомизируемые чат-боты в Telegram и VK, связанные через единый бэкенд с админ-панелью.
+# SpeechTherapyBots
+Initially developed for mobile app "Privet, Logoped!" within a hackathon, **SpeechTherapyBots** are heavily customizable bots for Telegram and VK interconnected with Django admin panel via universal backend.
 
 
-## Функциональные цели проекта
-Создать чат-боты в VK и Telegram с целью увеличения количества продаж через помощь и информирование пользователей, а также для оптимизации работы автора проекта.
+## Initial project goals
+Create chatbots for Telegram and VK to improve sales, providing users with better support and information, and arrange the workflow of product owner in a more efficient manner.
 
 
-## Основные возможности
-* Настраиваемое через админ-панель меню ботов под разные роли пользоваталей.
-* Информационные кнопки: выдача текстов, ссылок и файлов.
-* Возможность создавать вложенные меню.
-* Связь с администраторами.
-* Админ-функционал в ботах для оперативных ответов на вопросы и блокировку пользователей.
-* Админ-панель для ответов на большое количество вопросов и управление проектом.
+## Main features
+* Bot menu, that is customizable via admin panel for different user roles.
+* Info buttons: automatic issue of texts, links and files.
+* Possibility to create nested menus.
+* Direct contact to administrators.
+* Admin features within the bots: answering user questions, blocking users.
+* Admin panel with the possibility to answer several questions, and for general administration purposes.
 
 
-## Достигнутые требования
-* Админ-панель с настраиваемыми меню под разные роли.
-* Навигация по меню.
-* Информационные кнопки: выдача текстов и файлов.
-* Вопросы пользователей администраторам.
-* Полная интернационализация.
-* Ответы администраторов пользователям (не более 1 администратора одновременно).
-* Рассылка ответов пользователям (только Telegram).
-* Подписка на рассылку (Telegram — частично).
-* Смена роли пользователя (только VK).
-* Минимальная система логирования ошибок.
+## Achieved goals
+* Admin panel with customizable menus for different roles.
+* Menu navigation.
+* Info buttons: automatic issue of texts and files.
+* User questions to administrators.
+* Fully international release.
+* Admin answering interface (not more than 1 admin at a time).
+* Issue of answers to users (currently only in Telegram).
+* Subscriptions (Telegram — partially).
+* Change user role (currently only in VK).
+* Minimal errors logging system.
 
 
-## Структура проекта
-* `/infra` — Директория с файлами для деплоя на сервер.
-* `/backend` — Основная директория со стандартной структурой django-проекта.
+## Project structure
+* `/infra` — Directory with the files for server deploy.
+* `/backend` — Main directory with Django project structure.
 
-Файлы с настройками:
-* `/backend/settings.py` — Основные настройки.
-* `/core/localization.py` — Все тексты локализации.
+Settings:
+* `/backend/settings.py` — Main settings.
+* `/core/localization.py` — Localization literals.
 
 
-## Технологии
+## Stack
 * Python 3.11
 * Django 4.2
 * python-telegram-bot 13.7
@@ -46,171 +46,170 @@
 * gunicorn 23.0
 
 
-## Установка и запуск
+## Installation and startup
 
-### Telegram бот
-#### 1. Создание бота:
-- Откройте мессенджер [Telegram](https://telegram.org/apps), войдите в вашу учётную запись или создайте новую.
-- Введите в поле поиска [@BotFather](https://telegram.me/BotFather) и выберите бота.
+### Telegram bot
+#### 1. Bot creation:
+- Open [Telegram](https://telegram.org/apps), login into your account, or create a new one.
+- Search for [@BotFather](https://telegram.me/BotFather) and choose the bot.
 
->У официального бота Telegram будет стоять синий подтверждающий знак возле имени в виде галочки.
+>The official Telegram bot has a blue confirmation icon with a tickmark.
 
-- Нажмите `Запустить` или отправьте в чат команду `/start` для активации бота `BotFather`.
+- Push `Start` or type `/start` to activate `BotFather`.
 
-В ответ вы получите список команд по управлению ботом.
+You will get a list of commands to manage your bot.
 
-- Выберите или напечатайте и отправьте команду `/newbot`.
-- Дайте `имя` боту — пользователи увидят это имя при общении с ботом.
-- Далее укажите `никнейм` бота — по нему можно будет найти бота в Telegram. Никнейм должен быть уникальным, не повторять существующие и заканчиваться на слово `bot`, например, `TelegramBot` или `tg_bot`.
+- Choose or type `/newbot`.
+- Give your bot a `name` — users will see this name when communicating.
+- Next, pick a `nickname` for your bot so that users are able to find it in Telegram. Nickname must be unique, different from already existing ones and end with `bot`, e.g. `TelegramBot` or `tg_bot`.
 
->`Имя` может быть любым. Нестрашно, если оно будет дублировать уже существующие. Но `никнейм` бота обязательно должен быть уникальным. Если `никнейм` уже занят, вы увидите подсказку: `«Sorry, this username is already taken. Please try something different»`.
+>`Name` can be anything you like. It can also be the same as the already existing ones.
 
-- После того как вы выберите подходящее имя бот будет создан. Вы получите сообщение со ссылкой на бота `t.me/<никнейм_бота>`, рекомендации по настройке аватарки, описание бота, список команд для его настройки и самое главное - вы получите `токен`.
+- After you pick a suitable name, bot will be created. You will get a link to your bot: `t.me/<bot_nickname>`, and recommendations on how to set up bot avatar, description, list of commands, and - what you need right now - bot `token`.
 
-#### 2. Как получить `токен` для уже существующего бота:
-- Перейдите к боту `@BotFather` и введите команду `/token`. Вы увидите кнопки с `никнеймами` созданных ботов.
-- Выберите бота, чей токен нужно получить.
-- Скопируйте полученный от `@BotFather` `токен` для вашего бота.
+#### 2. How to obtain a `token` for the already existing bot:
+- Go to `@BotFather` and type `/token`. You will see buttons with `nicknames` of already created bots.
+- Choose a bot that you need to have token for.
+- Copy the `token` you have received from `@BotFather`.
 
-### VK бот
-#### 1. Подготовка группы ВК:
-- Зайдите на главную страницу группы с аккаунта администратора и выберите на боковой панели `Управление`.
-- Перейдите в раздел `Настройки` -> `Работа с API`.
-- Нажмите `Создать ключ` и разрешите доступ к *управлению сообществом*, *сообщениям сообщества* и *документам сообщества*. Этот ключ пригодится в будущем.
-- В разделе `Настройки` -> `Работа с API` откройте вкладку `Long Poll API` и включите его.
-- В той же вкладке откройте `Типы событий` и отметьте все пункты под заголовками *Сообщения* и *Пользователи*.
-- В боковом меню выйдите из раздела `Настройки` -> `Работа с API`, откройте раздел `Сообщения` и включите *Сообщения сообщества*.
-- Перейдите в раздел `Сообщения` -> `Настройки для бота`.
-- Включите *Возможности ботов* и отметьте пункт *Добавить кнопку «Начать»*.
+### VK bot
+#### 1. VK group set up:
+- Go to the main page of your group using administrator account and choose `Management` from the side panel.
+- Go to `Settings` -> `API`.
+- Pick `Create a key` and provide access for *group management*, *group messages* and *group documents*. You will need this key later.
+- When in `Settings` -> `API`, choose `Long Poll API` and turn it on.
+- In the same section choose `Event types` and turn on all options under the headers *Messages* and *Users*.
+- Exit `Settings` -> `API` in side menu, open the `Messages` section and turn on *Group messages*.
+- Go to `Messages` -> `Settings for bot`.
+- Turn on *Possibilities of bots* and *Add «Start» button*.
 
-#### 2. Получения данных для `.env`:
-- `Токен` для бота ВК был создан на предыдущем этапе и сейчас хранится в разделе `Настройки` -> `Работа с API` -> `Ключи доступа`. Нажмите на кнопку *Показать* напротив него.
-- `ID` группы ВК - это набор цифр, которыми заканчивается адрес группы: https://vk.com/club`XXXXXX`
+#### 2. Getting data for `.env` file:
+- Your VK bot `token` has been created at the previous stage, and is currently stored at `Settings` -> `API` -> `Access keys`. Push the *Show* button to see it.
+- VK group `ID` is a sequence of numbers following the group URL: https://vk.com/club`XXXXXX`
 
 
-### Запуск проекта локально
-- Добавьте `токен` телеграм-бота, `токен` вк бота и `id` вк группы в файл с переменными окружения `.env`, расположенный в головной директории проекта, а если этого файла нет, то создайте его по примеру файла `.env.example`.
-- Укажите `SQLITE=True` и `DEBUG=True`.
+### Launching SpeechTherapyBots locally
+- Add your Telegram bot `token`, VK bot `token` and VK group `id` to `.env` file located at main project directory. Should such file be missing, create it based on `.env.example`.
+- Set variables `SQLITE=True` and `DEBUG=True`.
 
 ```
 SQLITE=True
 DEBUG=True
-VK_TOKEN=Ваш токен из Ключей доступа (ВК)
-VK_GROUP_ID=ID группы (ВК)
-TELEGRAM_TOKEN=Ваш токен от BotFather (Telegram)
+VK_TOKEN=Your token from VK access keys
+VK_GROUP_ID=VK Group ID
+TELEGRAM_TOKEN=Your token from BotFather (Telegram)
 ```
 
-- Перейдите в головную директорию проекта `SpeechTherapyBots` и активируйте там виртуальное окружение:
+- Go to head directory of `SpeechTherapyBots` and activate virtual environment:
 
-Для `MacOS` или `Linux`
+For `MacOS` or `Linux`
 ```
 python3 -m venv venv
 source venv/bin/activate
 ```
-Для `Windows`
+For `Windows`
 ```
 python -m venv venv
 source venv/Scripts/activate
 ```
-- Обновите менеджер пакетов pip:
+- Upgrade pip package manager:
 ```
 pip install --upgrade pip 
 ```
-- Установите зависимости:
+- Install requirements:
 ```
 pip install -r requirements.txt
 ```
 
-- Убедитесь, что у вас применены все необходимые миграции. Это можно 
-  сделать из головной директории проекта с помощью команды:
+- Make sure you have applied all necessary migrations by running the following command from head directory of the project:
 
-Для `MacOS` или `Linux`
+For `MacOS` or `Linux`
 ```
 python3 backend/manage.py migrate
 ```
-Для `Windows`
+For `Windows`
 ```
 python backend/manage.py migrate
 ```
-- Для создания учётной записи администратора выполните команду:
+- Use the following command to create an administrator account:
 
-Для `MacOS` или `Linux`
+For `MacOS` or `Linux`
 ```
 python3 backend/manage.py createsuperuser
 ```
-Для `Windows`
+For `Windows`
 ```
 python backend/manage.py createsuperuser
 ```
 
-- Для запуска телеграмм бота из той же директории выполните команду:
+- Use the following command to launch Telegram bot from the same directory:
 
-Для `MacOS` или `Linux`
+For `MacOS` or `Linux`
 ```
 python3 backend/manage.py telegram_bot
 ```
-Для `Windows`
+For `Windows`
 ```
 python backend/manage.py telegram_bot
 ```
-- Для запуска вк бота из той же директории выполните команду:
+- Use the following command to launch VK bot from the same directory:
 
-Для `MacOS` или `Linux`
+For `MacOS` or `Linux`
 ```
 python3 backend/manage.py vk_bot
 ```
-Для `Windows`
+For `Windows`
 ```
 python backend/manage.py vk_bot
 ```
 
 
-### Деплой на сервер
->NB: Инструкция приведена для debian-based дистрибутива Linux!
+### Server deploy
+>NB: This manual is provided for a debian-based Linux distribution!
 
-#### 1. Убедитесь, что на сервере установлены все необходимые пакеты.
+#### 1. Make sure that all necessary packages are installed at your server.
 
 ```
 sudo apt update
 sudo apt install git python3 python3-pip python3-venv nano postgresql systemd
 ```
 
-#### 2. Настройте базу данных PostgreSQL.
+#### 2. Set up PostgreSQL database.
 
-- Запустите системную службу postgresql и включите её для автоматического запуска при загрузке сервера.
+- Enable `postgresql` system service for automatic launch upon startup of the server.
 ```
 sudo systemctl enable --now postgresql
 ```
 
-- Создайте пользователя, от имени которого будет использоваться база данных.
+- Create a user that will be the owner of your database.
 ```
-sudo -su postgres createuser <имя_пользователя>
-```
-
-- Создайте базу данных и укажите её владельцем ранее созданного пользователя.
-```
-sudo -su postgres createdb <название_базы_данных> -O <имя_пользователя>
+sudo -su postgres createuser <username>
 ```
 
-- Задайте пароль для созданного пользователя.
+- Create your database and set the previously created user as its owner.
 ```
-sudo -u postgres psql -c "ALTER USER <имя_пользователя> PASSWORD '<пароль_пользователя>';"
+sudo -su postgres createdb <database_name> -O <username>
 ```
 
-#### 3. Клонируйте репозиторий и настройте проект перед первым запуском.
+- Create a password for your user.
+```
+sudo -u postgres psql -c "ALTER USER <username> PASSWORD '<user_password>';"
+```
 
-- Клонируйте репозиторий на сервер и перейдите в его корневую директорию.
+#### 3. Clone the repository and set up the project for its first start.
+
+- Clone the repository and cd into its main directory.
 ```
 git clone git@github.com:zhmur-dev/SpeechTherapyBots.git
 cd SpeechTherapyBots/
 ```
 
-- Создайте и заполните файл `.env` по образцу из `.env.example`. Название базы данных (`DATABASE_NAME`), имя пользователя (`POSTGRES_USER`) и пароль (`POSTGRES_PASSWORD`) Вы задали ранее на шаге 2. Не забудьте также указать актуальный адрес Вашего сервера в `ALLOWED_HOSTS`.
+- Create and fill in an `.env` file based on the example provided in `.env.example`. (`DATABASE_NAME`), (`POSTGRES_USER`) and (`POSTGRES_PASSWORD`) were set up by you previously at Step 2. Don't forget to specify your actual server location in `ALLOWED_HOSTS`.
 ```
 nano .env
 ```
 
-#### 4. Создайте и активируйте виртуальное окружение, установите зависимости и примените все нужные миграции.
+#### 4. Create and activate virtual environment, install requirements and apply all necessary migrations.
 ```
 cd backend/
 python3 -m venv venv
@@ -221,15 +220,13 @@ python3 manage.py collectstatic
 python3 manage.py migrate
 ```
 
-#### 5. Создайте учётную запись первого пользователя-администратора.
+#### 5. Create the first administrator account.
 ```
 python3 manage.py createsuperuser
 ```
 
-#### 6. Настройте инфраструктуру.
-Отредактируйте файлы `backend.service`, `telegram-bot.service` и `vk-service` из директории `infra` и поместите их 
-в `/etc/systemd/system/` на Вашем сервере. (При редактировании необходимо указать абсолютный путь до директории 
-с проектом на Вашем сервере и имя пользователя на Вашем сервере, от имени которого будет осуществляться запуск демонов.)
+#### 6. Set up infrastructure.
+Edit `backend.service`, `telegram-bot.service` and`vk-service` files from `infra` directory and put them to `/etc/systemd/system/` at your server. When editing, specify the absolute path to project directory at your server and correct name of the user at your server that will be used to launch daemons.
 
 ```
 nano ../infra/backend.service
@@ -238,18 +235,18 @@ nano ../infra/vk-bot.service
 sudo cp ../infra/backend.service ../infra/telegram-bot.service ../infra/vk-bot.service /etc/systemd/system
 ```
 
-#### 7. Запустите созданные службы и включите их в автоматический запуск при перезагрузке сервера.
+#### 7. Enable the created services for automatic launch at server startup.
 ```
 sudo systemctl enable --now backend
 sudo systemctl enable --now telegram-bot
 sudo systemctl enable --now vk-bot
 ```
 
-Проект готов к работе на Вашем удалённом сервере!
+The project is ready for operation at your remote server!
 
 
-## Авторы
-* Евгений [MicroElf](https://github.com/MicroElf) Черных - Team Leader
-* Александр [zhmur-dev](https://github.com/zhmur-dev) Жмурков - Backend
-* Денис [KrDenches](https://github.com/KrDenches) Крохин - Telegram
-* Всеволод [Vsevolod25](https://github.com/Vsevolod25) Колупатин - VK
+## Authors
+* Evgeny [MicroElf](https://github.com/MicroElf) Chernykh - Team Leader
+* Alexander [zhmur-dev](https://github.com/zhmur-dev) Zhmurkov - Backend
+* Denis [KrDenches](https://github.com/KrDenches) Krokhin - Telegram
+* Vsevolod [Vsevolod25](https://github.com/Vsevolod25) Kolupatin - VK
